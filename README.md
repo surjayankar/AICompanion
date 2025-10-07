@@ -1,60 +1,189 @@
-# AI Companion App  
+# AI Companion App
 
-The **AI Companion App** is a full-stack template for building customizable AI companions that you can chat with directly in the browser.  
+<div align="center">
 
-Each companion has its own **personality, backstory, and memory**, allowing for more natural and engaging conversations. The system uses a **vector database** for contextual recall, enabling companions to reference details from previous interactions or their defined backstory.  
+![AI Companion](https://img.shields.io/badge/AI-Companion-blue)
+![Next.js](https://img.shields.io/badge/Next.js-13-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.1-blue)
+![LangChain](https://img.shields.io/badge/LangChain-0.0.92-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
----
+**Build conversational AI companions with personality, memory, and context-aware responses**
 
-## ✨ Key Features  
+[Features](#-features) • [Demo](#-demo) • [Quick Start](#-quick-start) • [Architecture](#-architecture) • [Documentation](#-documentation)
 
-- **Multiple AI Companions** – define as many unique characters as you want  
-- **Custom Personalities** – control behavior, tone, and backstory through simple text files  
-- **Conversational Memory** – stores chat history for richer, more contextual dialogue  
-- **Vector Database Integration** – powered by Supabase pgvector for semantic search  
-- **Choice of LLMs** – fast and reliable responses from OpenAI or more dynamic interactions with Replicate’s Vicuna  
-- **Authentication & User Management** – secured with Clerk  
-- **Modern Web Stack** – Next.js frontend with LangChain.js for orchestration  
+</div>
 
 ---
 
-## 🛠️ Tech Stack  
+## 📖 Overview
 
-- **Frontend & App Logic** → Next.js  
-- **Authentication** → Clerk  
-- **Vector Database** → Supabase (pgvector)  
-- **Conversation History** → Upstash (Redis)  
-- **LLM Orchestration** → LangChain.js  
-- **Models Supported** → OpenAI GPT, Replicate (Vicuna13b)  
+AI Companion App is a production-ready, full-stack template for building customizable AI chatbots with persistent memory and dynamic personalities. Each companion maintains conversational context through vector similarity search and chat history, enabling more natural and engaging interactions.
 
----
+### What Makes This Different?
 
-## 📖 How It Works  
-
-1. **Character Definition** – Each companion has a description, seed conversation, and backstory stored in the project.  
-2. **Embeddings** – Character data is embedded and stored in Supabase pgvector.  
-3. **Conversation Flow** – LangChain retrieves relevant memory and backstory, then builds prompts for the chosen LLM.  
-4. **Chat Interface** – A clean Next.js interface lets users talk to companions in real time.  
+- **🎭 Unique Personalities** - Define characters with custom backstories, behaviors, and conversational styles
+- **🧠 Contextual Memory** - Vector database integration enables semantic recall of relevant information
+- **💬 Multi-Model Support** - Switch between OpenAI GPT, Llama2, Vicuna, or custom LLM providers
+- **📱 Multi-Channel** - Chat via web interface or SMS (Twilio integration)
+- **🔒 Enterprise Auth** - Secure authentication with Clerk
+- **⚡ Real-time Streaming** - Instant response streaming for better UX
 
 ---
 
-## 🚀 Use Cases  
+## ✨ Features
 
-- AI friends & social chatbots  
-- Storytelling and creative writing partners  
-- Coaching or educational companions  
-- Entertainment and roleplay  
-- Experimentation for developers learning about LLM apps  
+### Core Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **Character System** | Define unlimited AI companions with text-based configuration files |
+| **Vector Memory** | Semantic search through Pinecone or Supabase pgvector |
+| **Chat History** | Persistent conversation storage via Upstash Redis |
+| **Streaming Responses** | Real-time token streaming using Vercel AI SDK |
+| **Rate Limiting** | Built-in protection against abuse (10 req/10s) |
+| **Multi-modal Output** | Support for text, images, audio, and video responses |
+| **SMS Integration** | Text your AI companion via Twilio (optional) |
+| **Export Functionality** | Export chat history to Character.AI format |
+
+### Supported LLM Providers
+
+- ✅ **OpenAI** (GPT-3.5-turbo-16k, GPT-4)
+- ✅ **Replicate** (Llama2-13b, Vicuna-13b)
+- ✅ **Steamship** (Custom agents)
+- 🔧 **Extensible** - Easy to add new providers
 
 ---
 
-## ⚠️ Limitations  
+### Live Demo
+```bash
+# Try it yourself
+npm run dev
+# Navigate to http://localhost:3000
+```
 
-- Only the most recent chat is displayed in the UI (conversation history is stored but not fully visualized)  
-- Vicuna responses can be slow due to cold start times  
-- Error handling is minimal (timeouts may fail silently)  
-- Conversation history in Upstash must be cleared manually  
+## 🚀 Quick Start
+### Prerequisites
 
----
+Node.js 18.x or higher
+npm or yarn
+API keys for services you plan to use (see Environment Setup)
 
- 
+### Installation
+# Clone the repository
+git clone https://github.com/yourusername/ai-companion-app.git
+cd ai-companion-app
+
+# Install dependencies
+npm install
+
+# Copy environment template
+cp .env.local.example .env.local
+
+# Configure your environment variables (see below)
+## Environment Setup
+Create a .env.local file with the following variables:
+# Vector Database (choose one)
+VECTOR_DB=pinecone  # or 'supabase'
+
+# Authentication (Clerk)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_****
+CLERK_SECRET_KEY=sk_****
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# LLM Providers
+OPENAI_API_KEY=sk-****
+REPLICATE_API_TOKEN=r8_****
+
+# Vector Database (Pinecone)
+PINECONE_API_KEY=****
+PINECONE_ENVIRONMENT=us-****
+PINECONE_INDEX=****
+
+# OR Vector Database (Supabase)
+SUPABASE_URL=https://****
+SUPABASE_PRIVATE_KEY=****
+
+# Chat History (Upstash Redis)
+UPSTASH_REDIS_REST_URL=https://****
+UPSTASH_REDIS_REST_TOKEN=****
+
+# Optional: SMS Support (Twilio)
+TWILIO_ACCOUNT_SID=AC****
+TWILIO_AUTH_TOKEN=****
+
+# Optional: Steamship Agents
+STEAMSHIP_API_KEY=****
+
+## Generate Vector Embeddings
+Before running the app, generate embeddings for your character backstories:
+# For Pinecone
+npm run generate-embeddings-pinecone
+
+# For Supabase
+npm run generate-embeddings-supabase
+
+## Run Development Server
+npm run dev
+
+### 🏗️ Architecture
+System Overview
+┌─────────────┐
+│   Client    │
+│  (Next.js)  │
+└──────┬──────┘
+       │
+       ├──────────────┬──────────────┬──────────────┐
+       │              │              │              │
+       ▼              ▼              ▼              ▼
+┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
+│   Auth   │   │   Chat   │   │  Vector  │   │  Memory  │
+│  (Clerk) │   │   API    │   │   DB     │   │  (Redis) │
+└──────────┘   └────┬─────┘   └──────────┘   └──────────┘
+                    │
+                    ├──────────┬──────────┬──────────┐
+                    ▼          ▼          ▼          ▼
+             ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+             │  OpenAI  │ │ Replicate│ │Steamship │ │  Custom  │
+             └──────────┘ └──────────┘ └──────────┘ └──────────┘
+
+## Data Flow
+
+User sends message → Authenticated via Clerk
+Rate limiting check → Upstash Redis
+Retrieve chat history → Last 30 messages from Redis
+Vector similarity search → Relevant backstory chunks from Pinecone/Supabase
+Construct prompt → Combine personality + history + context
+LLM inference → Stream response from chosen provider
+Store message → Save to Redis for future context
+
+## Key Components
+src/
+├── app/
+│   ├── api/
+│   │   ├── chatgpt/route.ts       # OpenAI integration
+│   │   ├── llama2-13b/route.ts    # Replicate Llama2
+│   │   ├── vicuna13b/route.ts     # Replicate Vicuna
+│   │   ├── steamship/route.ts     # Steamship agents
+│   │   └── text/route.ts          # Twilio SMS handler
+│   ├── utils/
+│   │   ├── memory.ts              # Vector DB & Redis manager
+│   │   ├── config.ts              # Configuration loader
+│   │   └── rateLimit.ts           # Rate limiting logic
+│   └── page.tsx                   # Landing page
+├── components/
+│   ├── Examples.tsx               # Character gallery
+│   ├── QAModal.tsx                # Chat interface
+│   ├── ChatBlock.tsx              # Multimodal message rendering
+│   └── Navbar.tsx                 # Navigation bar
+└── companions/
+    ├── companions.json            # Character configurations
+    ├── Alex.txt                   # Character definition files
+    ├── Evelyn.txt
+    └── ...
+
+
+
