@@ -10,7 +10,7 @@
 
 **Build conversational AI companions with personality, memory, and context-aware responses**
 
-[Features](#-features) • [Demo](#-demo) • [Quick Start](#-quick-start) • [Architecture](#-architecture) • [Documentation](#-documentation)
+[Features](#-features) • [Demo](#-live-demo) • [Quick Start](#-quick-start) • [Architecture](#-architecture) 
 
 </div>
 
@@ -62,14 +62,14 @@ npm run dev
 # Navigate to http://localhost:3000
 ```
 
-## 🚀 Quick Start
-### Prerequisites
+### 🚀 Quick Start
+## Prerequisites
 
 Node.js 18.x or higher
 npm or yarn
 API keys for services you plan to use (see Environment Setup)
 
-### Installation
+## Installation
 # Clone the repository
 git clone https://github.com/yourusername/ai-companion-app.git
 cd ai-companion-app
@@ -81,7 +81,7 @@ npm install
 cp .env.local.example .env.local
 
 # Configure your environment variables (see below)
-## Environment Setup
+# Environment Setup
 Create a .env.local file with the following variables:
 # Vector Database (choose one)
 VECTOR_DB=pinecone  # or 'supabase'
@@ -126,7 +126,7 @@ npm run generate-embeddings-pinecone
 # For Supabase
 npm run generate-embeddings-supabase
 
-## Run Development Server
+# Run Development Server
 npm run dev
 
 ### 🏗️ Architecture
