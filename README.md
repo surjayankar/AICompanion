@@ -55,38 +55,38 @@ AI Companion App is a production-ready, full-stack template for building customi
 
 ---
 
-### Live Demo
+## Live Demo
 ```bash
 # Try it yourself
 npm run dev
 # Navigate to http://localhost:3000
 ```
 
-### 🚀 Quick Start
-## Prerequisites
+## 🚀 Quick Start
+### Prerequisites
 
 Node.js 18.x or higher
 npm or yarn
 API keys for services you plan to use (see Environment Setup)
 
-## Installation
-# Clone the repository
+### Installation
+### Clone the repository
 git clone https://github.com/yourusername/ai-companion-app.git
 cd ai-companion-app
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Copy environment template
+### Copy environment template
 cp .env.local.example .env.local
 
-# Configure your environment variables (see below)
-# Environment Setup
+### Configure your environment variables (see below)
+### Environment Setup
 Create a .env.local file with the following variables:
-# Vector Database (choose one)
+### Vector Database (choose one)
 VECTOR_DB=pinecone  # or 'supabase'
 
-# Authentication (Clerk)
+### Authentication (Clerk)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_****
 CLERK_SECRET_KEY=sk_****
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
@@ -94,43 +94,43 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
-# LLM Providers
+### LLM Providers
 OPENAI_API_KEY=sk-****
 REPLICATE_API_TOKEN=r8_****
 
-# Vector Database (Pinecone)
+### Vector Database (Pinecone)
 PINECONE_API_KEY=****
 PINECONE_ENVIRONMENT=us-****
 PINECONE_INDEX=****
 
-# OR Vector Database (Supabase)
+### OR Vector Database (Supabase)
 SUPABASE_URL=https://****
 SUPABASE_PRIVATE_KEY=****
 
-# Chat History (Upstash Redis)
+### Chat History (Upstash Redis)
 UPSTASH_REDIS_REST_URL=https://****
 UPSTASH_REDIS_REST_TOKEN=****
 
-# Optional: SMS Support (Twilio)
+### Optional: SMS Support (Twilio)
 TWILIO_ACCOUNT_SID=AC****
 TWILIO_AUTH_TOKEN=****
 
-# Optional: Steamship Agents
+### Optional: Steamship Agents
 STEAMSHIP_API_KEY=****
 
 ## Generate Vector Embeddings
 Before running the app, generate embeddings for your character backstories:
-# For Pinecone
+### For Pinecone
 npm run generate-embeddings-pinecone
 
-# For Supabase
+### For Supabase
 npm run generate-embeddings-supabase
 
-# Run Development Server
+## Run Development Server
 npm run dev
 
-### 🏗️ Architecture
-System Overview
+## 🏗️ Architecture
+### System Overview
 ┌─────────────┐
 │   Client    │
 │  (Next.js)  │
@@ -152,13 +152,13 @@ System Overview
 
 ## Data Flow
 
-User sends message → Authenticated via Clerk
-Rate limiting check → Upstash Redis
-Retrieve chat history → Last 30 messages from Redis
-Vector similarity search → Relevant backstory chunks from Pinecone/Supabase
-Construct prompt → Combine personality + history + context
-LLM inference → Stream response from chosen provider
-Store message → Save to Redis for future context
+1. User sends message → Authenticated via Clerk
+2. Rate limiting check → Upstash Redis
+3. Retrieve chat history → Last 30 messages from Redis
+4. Vector similarity search → Relevant backstory chunks from Pinecone/Supabase
+5. Construct prompt → Combine personality + history + context
+6. LLM inference → Stream response from chosen provider
+7. Store message → Save to Redis for future context
 
 ## Key Components
 src/
