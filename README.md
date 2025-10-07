@@ -6,11 +6,10 @@
 ![Next.js](https://img.shields.io/badge/Next.js-13-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.1-blue)
 ![LangChain](https://img.shields.io/badge/LangChain-0.0.92-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
 **Build conversational AI companions with personality, memory, and context-aware responses**
 
-[Features](#-features) • [Demo](#-live-demo) • [Quick Start](#-quick-start) • [Architecture](#-architecture) 
+[Features](#-features) • [Demo](#live-demo) • [Quick Start](#-quick-start) • [Architecture](#system-overview)
 
 </div>
 
@@ -66,89 +65,97 @@ npm run dev
 ### Prerequisites
 
 Node.js 18.x or higher
+```bash
 npm or yarn
+```
 API keys for services you plan to use (see Environment Setup)
 
 ### Installation
 ### Clone the repository
+```bash
 git clone https://github.com/yourusername/ai-companion-app.git
 cd ai-companion-app
+```
 
 ### Install dependencies
+```bash
 npm install
-
+```
 ### Copy environment template
+```bash
 cp .env.local.example .env.local
-
+```
 ### Configure your environment variables (see below)
 ### Environment Setup
 Create a .env.local file with the following variables:
 ### Vector Database (choose one)
-VECTOR_DB=pinecone  # or 'supabase'
-
+```bash
+VECTOR_DB= 'pinecone'  or 'supabase'
+```
 ### Authentication (Clerk)
+```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_****
 CLERK_SECRET_KEY=sk_****
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-
+```
 ### LLM Providers
+```bash
 OPENAI_API_KEY=sk-****
 REPLICATE_API_TOKEN=r8_****
+```
 
 ### Vector Database (Pinecone)
+```bash
 PINECONE_API_KEY=****
 PINECONE_ENVIRONMENT=us-****
 PINECONE_INDEX=****
-
+```
 ### OR Vector Database (Supabase)
+```bash
 SUPABASE_URL=https://****
 SUPABASE_PRIVATE_KEY=****
-
+```
 ### Chat History (Upstash Redis)
+```bash
 UPSTASH_REDIS_REST_URL=https://****
 UPSTASH_REDIS_REST_TOKEN=****
+```
 
 ### Optional: SMS Support (Twilio)
+```bash
 TWILIO_ACCOUNT_SID=AC****
 TWILIO_AUTH_TOKEN=****
+```
 
 ### Optional: Steamship Agents
+```bash
 STEAMSHIP_API_KEY=****
+```
 
 ## Generate Vector Embeddings
 Before running the app, generate embeddings for your character backstories:
 ### For Pinecone
+```bash
 npm run generate-embeddings-pinecone
+```
 
 ### For Supabase
+```bash
 npm run generate-embeddings-supabase
+```
 
 ## Run Development Server
+```bash
 npm run dev
+```
 
 ## 🏗️ Architecture
 ### System Overview
-┌─────────────┐
-│   Client    │
-│  (Next.js)  │
-└──────┬──────┘
-       │
-       ├──────────────┬──────────────┬──────────────┐
-       │              │              │              │
-       ▼              ▼              ▼              ▼
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│   Auth   │   │   Chat   │   │  Vector  │   │  Memory  │
-│  (Clerk) │   │   API    │   │   DB     │   │  (Redis) │
-└──────────┘   └────┬─────┘   └──────────┘   └──────────┘
-                    │
-                    ├──────────┬──────────┬──────────┐
-                    ▼          ▼          ▼          ▼
-             ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-             │  OpenAI  │ │ Replicate│ │Steamship │ │  Custom  │
-             └──────────┘ └──────────┘ └──────────┘ └──────────┘
+<img width="419" height="286" alt="image" src="https://github.com/user-attachments/assets/c6f9a51a-11e5-4d6a-84df-4ac06e4e0278" />
+
 
 ## Data Flow
 
@@ -161,6 +168,7 @@ npm run dev
 7. Store message → Save to Redis for future context
 
 ## Key Components
+```bash
 src/
 ├── app/
 │   ├── api/
@@ -184,6 +192,7 @@ src/
     ├── Alex.txt                   # Character definition files
     ├── Evelyn.txt
     └── ...
+```
 
 
 
