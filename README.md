@@ -1,3 +1,5 @@
+https://ai-companion-stack.com/sign-in?redirect_url=https%3A%2F%2Fai-companion-stack.com%2F
+
 # AI Companion App
 
 <div align="center">
